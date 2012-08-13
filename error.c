@@ -113,30 +113,6 @@ char *strerror_r ();
    name of the executing program.  */
 extern char *program_name;
 
-# if HAVE_STRERROR_R || defined strerror_r
-#  define __strerror_r strerror_r
-# else
-#  if HAVE_STRERROR
-#   ifndef HAVE_DECL_STRERROR
-"this configure-time declaration test was not run"
-#   endif
-#   if !HAVE_DECL_STRERROR
-char *strerror ();
-#   endif
-#  else
-static char *
-private_strerror (int errnum)
-{
-  extern char *sys_errlist[];
-  extern int sys_nerr;
-
-  if (errnum > 0 && errnum <= sys_nerr)
-    return _(sys_errlist[errnum]);
-  return _("Unknown system error");
-}
-#   define strerror private_strerror
-#  endif /* HAVE_STRERROR */
-# endif	/* HAVE_STRERROR_R || defined strerror_r */
 #endif	/* not _LIBC */
 
 static void

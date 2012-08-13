@@ -23,8 +23,10 @@
 # include <string.h>
 #endif
 
+#include <stdlib.h>
+
 #include "dirname.h"
-#include "xalloc.h"
+//#include "xalloc.h"
 
 /* Return the length of `dirname (PATH)', or zero if PATH is
    in the working directory.  Works properly even if
@@ -54,7 +56,7 @@ dir_name (char const *path)
 {
   size_t length = dir_len (path);
   int append_dot = (length == FILESYSTEM_PREFIX_LEN (path));
-  char *newpath = xmalloc (length + append_dot + 1);
+  char *newpath = (char *)malloc(length + append_dot + 1);
   memcpy (newpath, path, length);
   if (append_dot)
     newpath[length++] = '.';

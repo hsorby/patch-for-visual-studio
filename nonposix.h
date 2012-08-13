@@ -7,15 +7,21 @@
 #include <stdio.h>
 #include <fcntl.h>
 
+#ifndef _stat
 #define _stat	_stati64
+#endif
 #define stat	_stati64
+#ifndef _fstat
 #define _fstat	_fstati64
+#endif
 #define fstat	_fstati64
 #define off_t	__int64
-#define	lseek       _lseeki64
-#define	lseek64     _lseeki64
-#define	tell        _telli64
-#define	tell64      _telli64
+#ifndef _MSC_VER
+# define	lseek       _lseeki64
+# define	lseek64     _lseeki64
+# define	tell        _telli64
+# define	tell64      _telli64
+#endif
 
 #ifndef _S_IFSOCK
 #define  _S_IFSOCK       0xC000    /* socket */
@@ -41,7 +47,7 @@
 #define NULL_DEVICE "NUL"
 #define TTY_DEVICE "CON"
 
-#define mkdir(name, mode) ((_mkdir) (name))
+//#define mkdir(name, mode) ((_mkdir) (name))
 #define rename(old,new) w32_rename(old,new)
 
 #ifndef HAVE_DOS_FILE_NAMES
@@ -63,6 +69,21 @@ extern int w32_rename (const char *old, const char *new);
 #ifdef __cplusplus
 }
 #endif
+
+#define mode_t int
+#define fdopen _fdopen
+#define unlink _unlink
+#define fileno _fileno
+#define open _open
+#define read _read
+#define write _write
+#define close _close
+#define isatty _isatty
+#define rmdir _rmdir
+#define chdir _chdir
+#define creat _creat
+#define lseek _lseek
+#define chmod _chmod
 
 #endif /* _WIN32 */
 

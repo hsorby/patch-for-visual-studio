@@ -27,7 +27,6 @@
 #endif
 
 #include <config.h>
-#include "nonposix.h"
 
 #include <assert.h>
 #include <stdbool.h>
@@ -70,8 +69,14 @@
 #define S_IRUSR (S_IROTH << 6)
 #endif
 #ifdef MKDIR_TAKES_ONE_ARG
-# define mkdir(name, mode) ((mkdir) (name))
+# ifdef _MSC_VER
+#  define mkdir(name, mode) ((_mkdir) (name))
+# else
+#  define mkdir(name, mode) ((mkdir) (name))
+# endif
 #endif
+
+#include "nonposix.h"
 
 #if HAVE_LIMITS_H
 # include <limits.h>
@@ -224,7 +229,9 @@ void *realloc ();
 # include <unistd.h>
 #else
 # ifndef lseek
-   off_t lseek ();
+#  ifndef _MSC_VER
+    off_t lseek ();
+#  endif
 # endif
 #endif
 #ifndef SEEK_SET

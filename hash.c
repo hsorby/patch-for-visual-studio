@@ -125,8 +125,8 @@ struct hash_table
    1.0).  The growth threshold defaults to 0.8, and the growth factor
    defaults to 1.414, meaning that the table will have doubled its size
    every second time 80% of the buckets get used.  */
-#define DEFAULT_GROWTH_THRESHOLD 0.8
-#define DEFAULT_GROWTH_FACTOR 1.414
+#define DEFAULT_GROWTH_THRESHOLD 0.8f
+#define DEFAULT_GROWTH_FACTOR 1.414f
 
 /* If a deletion empties a bucket and causes the ratio of used buckets to
    table size to become smaller than the shrink threshold (a number between

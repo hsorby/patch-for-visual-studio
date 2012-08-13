@@ -2,38 +2,37 @@
 
 #include <stdio.h>
 #include <errno.h>
-#include <unistd.h>
-#include <windows.h>
+//#include <unistd.h>
+//#include <windows.h>
+#include <io.h>
 #include "nonposix.h"
 
 /* Rename the file OLD to NEW.  */
 #ifdef rename
 #undef rename
 #endif
+//
+//int unlink (const char *filename)
+//{
+//	if (_access (filename, W_OK) < 0) 
+//		switch (errno) {
+//			case EINVAL:
+//				return -1;
+//				break;
+//			case ENOENT:
+//				return -1;
+//				break;
+//			case EACCES:
+//				_chmod (filename, _S_IREAD | _S_IWRITE);
+//				break;
+//			default:
+//				break;
+//		}
+//	return _unlink (filename);
+//}
 
-int unlink (const char *filename)
-{
-	if (_access (filename, W_OK) < 0) 
-		switch (errno) {
-			case EINVAL:
-				return -1;
-				break;
-			case ENOENT:
-				return -1;
-				break;
-			case EACCES:
-				_chmod (filename, _S_IREAD | _S_IWRITE);
-				break;
-			default:
-				break;
-		}
-	return _unlink (filename);
-}
-
-int
-w32_rename (old, new)
-	const char *old;
-	const char *new;
+static int F_OK = 0;
+int w32_rename (const char *old, const char *new)
 {
 	if (old == NULL || new == NULL) {
 		errno = EINVAL;

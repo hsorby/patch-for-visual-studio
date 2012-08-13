@@ -1,8 +1,3 @@
-patch-for-visual-studio
-=======================
-
-GNU Patch adapted for building with visual studio and CMake.
-
 This version of `patch' has many changes made by the Free Software Foundation.
 They add support for:
  * handling arbitrary binary data and large files
@@ -17,8 +12,7 @@ Tutorial-style documentation for patch is included in the GNU
 Diffutils package; get GNU Diffutils 2.8 or later for up-to-date
 documentation for patch.
 
-For GNU and Unix build and installation instructions, see the file INSTALL.  
-For Windows build and installation instructions, see the file INSTALL.win.
+For GNU and Unix build and installation instructions, see the file INSTALL.
 Use `configure --disable-largefile' to disable large file support;
 this is reportedly necessary on Red Hat GNU/Linux 6.0 to avoid a C library bug.
 For MS-DOS using DJGPP tools, see the file pc/djgpp/README.

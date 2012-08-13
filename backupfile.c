@@ -66,7 +66,7 @@
 "this configure-time declaration test was not run"
 #endif
 #if !HAVE_DECL_GETENV
-char *getenv ();
+//char *getenv ();
 #endif
 
 #ifndef HAVE_DECL_MALLOC
